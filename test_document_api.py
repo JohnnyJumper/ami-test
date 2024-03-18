@@ -35,10 +35,7 @@ class TestDocumentAPI(unittest.TestCase):
 		self.assertTrue(isinstance(data, list))
 		self.assertEqual(len(data), self.documents.__len__())
 
-    # Add more test methods for other endpoints (save_document_changes, get_duplicate_documents, etc.)
-
 	def test_save_document_changes(self):
-		# Test saving document changes with valid data
 		valid_data = {'documents': [{'id': 1, 'toUpdate': {'name': 'Updated Name'}}]}
 		response = self.api.save_document_changes(valid_data)
 		self.assertEqual(response.status_code, 200)
@@ -57,12 +54,12 @@ class TestDocumentAPI(unittest.TestCase):
 				self.api.save_document_changes(invalid_data)
 
 	def test_get_duplicate_documents(self):
-        # Test getting duplicate documents
 		response = self.api.get_duplicate_documents()
 		self.assertEqual(response.status_code, 200)
 		data = response.json
 		self.assertTrue(isinstance(data, dict))
 		self.assertIn('message', data)
+		
 		if data['message'] == 'Duplicates found':
 				self.assertIn('duplicates', data)
 		else:
